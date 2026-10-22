@@ -36,11 +36,19 @@ export {
   DEFAULT_INDEXER_TIMEOUT_MS,
   DEFAULT_INDEXER_MAX_PAGES,
 } from "./indexer.js";
-export { MockGraphQLIndexer, createMockIndexer } from "./mock-indexer.js";
+export {
+  MockGraphQLIndexer,
+  createMockIndexer,
+  createMockEventStream,
+  createMockEventStreamPage,
+  DEFAULT_MOCK_EVENT_LIFECYCLE,
+} from "./mock-indexer.js";
 export type {
   MockQueryMap,
   MockSubscriptionMap,
   MockIndexerOptions,
+  MockStreamEventKind,
+  MockEventStreamOptions,
 } from "./mock-indexer.js";
 export type {
   GraphQLQueryOptions,
@@ -61,8 +69,19 @@ export {
   LedgerHardwareError,
   normalizeLedgerError,
   classifyLedgerError,
+  WebAuthnSigner,
+  derToRawSignature,
 } from "./signer.js";
-export type { Signer, SignerOptions } from "./signer.js";
+export type {
+  Signer,
+  SignerOptions,
+  WebAuthnCredentialDescriptor,
+  WebAuthnAssertionResponse,
+  WebAuthnAssertionCredential,
+  WebAuthnCredentialsContainer,
+  WebAuthnCredentialScValKeys,
+  WebAuthnSignerOptions,
+} from "./signer.js";
 export {
   SorobanRpcError,
   ConduitError,
@@ -98,6 +117,7 @@ export {
   UNKNOWN_CONTRACT_ERROR_CODE,
   parseContractError,
   ContractError,
+  getRecoveryHint,
 } from "./errors.js";
 export type {
   ConduitContract,

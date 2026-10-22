@@ -83,6 +83,32 @@ export enum StreamState {
   ENDED = "ENDED",
 }
 
+/**
+ * Identifies the vesting schedule shape a stream follows.
+ *
+ * Numeric (not string) values, since this is meant to be passed across
+ * serialization boundaries (indexer payloads, stored UI state) cheaply.
+ *
+ * - `Linear`          — funds accrue at a constant `ratePerSecond` for the
+ *                        whole duration (the only shape the deployed
+ *                        DripStream contract currently streams — see
+ *                        {@link calculateAccruedAmount}).
+ * - `CliffLinear`      — no accrual until a cliff timestamp, then linear
+ *                        accrual for the remainder of the duration.
+ * - `ExponentialDecay` — accrual rate decreases exponentially over time
+ *                        rather than staying constant.
+ *
+ * `CliffLinear` and `ExponentialDecay` describe schedule shapes the SDK's
+ * types can represent for off-chain planning/UI purposes (e.g. a stream
+ * builder form, or an indexer that tags streams by intended shape) ahead of
+ * on-chain support; only `Linear` is currently enforced by the contract.
+ */
+export enum StreamScheduleType {
+  Linear = 0,
+  CliffLinear = 1,
+  ExponentialDecay = 2,
+}
+
 export interface ConduitConfig {
   /** Network to connect to */
   network: Network;
